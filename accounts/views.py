@@ -52,38 +52,10 @@ class Dashboard(LoginRequiredMixin,ListView):
         print(context)
         return context
 
-# @login_required
-# def Dashboard(request):
-#     order = Order.objects.all()
-#     customer = Customer.objects.all()
-#     total_orders = order.count()
-#     order_delievered = order.filter(status="Delievered").count()
-#     order_pending = order.filter(status="Pending").count()
-    
-#     context = {'orders':order, 'customers':customer,
-# 	'total_orders':total_orders,'delivered':order_delievered,
-# 	'pending':order_pending }
-    
-#     return render(request, 'dashboard.html', context)
-    
 class Products(LoginRequiredMixin,ListView):
     template_name="products.html"
     model = Product
     context_object_name = "products"
-    
-# class Customers(ListView):
-#     template_name="customers.html"
-#     queryset = Customer
-    
-#     def get_queryset(self):
-#         global user_id
-#         user_id = self.kwargs['id']
-#         return user_id
-    
-#     customer = Customer.objects.get(id=user_id)
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["customer"] = self.customer
    
    
 class UserView(LoginRequiredMixin,ListView):
@@ -216,12 +188,9 @@ def dashboard_list(request):
         "order_pending":order_pending
     }
 
-    # list_of_dicts = []
-    # list_of_dicts.append(dashboard_items)
-    # print(list_of_dicts)
     data= list(order)
-    # return HttpResponse(data, content_type="application/json")
-    return JsonResponse(data, safe=False)   
+    return JsonResponse(data, safe=False)
+   
 def orders_list(request):
     '''
     return orders list in json format
