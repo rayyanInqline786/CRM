@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block body %} {% include 'status.html' %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Date Ordered</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    {% for o in orders %}
+                    <tbody>
+                        <tr>
+                            <td>{{o.products}}</td>
+                            <td>{{o.products.category}}</td>
+                            <td>{{o.date_created}}</td>
+                            <td>{{o.status}}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %} {% block body %} {% include 'status.html' %}
+<div class="row mt-5">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4>Customers</h4>
+                <hr>
+                <a class="btn btn-primary my-2 w-100" href="{% url 'accounts:create_customers' %}">Create Customer</a>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customers</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    {% for c in customers %}
+                    <tbody>
+                        <tr>
+                            <td>{{c.name}}</td>
+                            <td>{{c.phone}}</td>
+                            <td><a href="{% url 'accounts:customer' c.id %}">View</a></td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h4>Create Orders</h4>
+                <hr>
+                <a href="{% url 'accounts:create_order' %}" class="btn btn-primary my-2 w-100">Create Order</a>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Date Ordered</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    {% for o in orders %}
+                    <tbody>
+                        <tr>
+                            <td>{{o.products}}</td>
+                            <td>{{o.date_created}}</td>
+                            <td>{{o.status}}</td>
+                            <td><a href="{% url 'accounts:update_orders' o.id %}">Update</a></td>
+                            <td><a href="{% url 'accounts:delete_orders' o.id %}" class="text-danger">Remove</a></td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
